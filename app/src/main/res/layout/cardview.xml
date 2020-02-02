@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ex_card"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/ex_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/line"
+        app:riv_border_color="#333333"
+        app:riv_corner_radius="20dp"
+        app:riv_mutate_background="true"
+        app:riv_oval="false" />
+
+    <TextView
+        android:id="@+id/tView_name"
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_marginStart="15sp"
+        android:layout_marginTop="15sp"
+        android:shadowColor="#B3000000"
+        android:shadowDx="15.0"
+        android:shadowDy="15.0"
+        android:shadowRadius="7.0"
+        android:text="@string/exhibition_name"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_gravity="bottom"
+        android:background="#99000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingRight="20sp">
+
+        <TextView
+            android:id="@+id/tView_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ex_time"
+            android:textAlignment="viewEnd"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tView_name"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/tView_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ex_num"
+            android:textAlignment="viewEnd"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tView_name"
+            app:layout_constraintVertical_bias="1.0" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
