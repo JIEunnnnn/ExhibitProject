@@ -29,4 +29,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+
+    //서버테스트용 추가
+    implementation("com.squareup.okhttp3:okhttp:4.3.1")
 }

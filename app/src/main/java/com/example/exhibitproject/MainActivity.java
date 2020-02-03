@@ -5,13 +5,25 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,19 +33,36 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
+    public static final String url = "http://192.168.0.27:3000";
+
+
+    private static final String TAG = "OKHTTP 테스트";
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    // textview httttext
+   //  TextView Data;
+   //  Button btn;
+    String result;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final HttpConnection connectServ = new HttpConnection();
+
         RecyclerView exList = findViewById(R.id.ex_list);
         mExArray = new ArrayList<ExItem>();
 
+        connectServ.requestGet(url);
+
+
         for(int i=0;i<5;i++){
             ExItem item = new ExItem();
-            item.setNum(0);
-            item.setTime(0);
-            item.setName("Exhibition "+(i+1));
+            item.setNum(0) ; // 예상인원
+            item.setTime(0); // 예상시간
+            item.setName(result);
             //item.setImage();
 
             layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -55,5 +84,56 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+    }
+
+    class HttpConnection {
+
+        OkHttpClient clnt = new OkHttpClient(); // OK객체 생성
+
+
+        public void requestGet(String url){  // 메소드를 생성하자.
+            try{
+
+                // body가 필요없는이유 클라에서 서버 전송할 값엇ㅄ으니까!
+                final Request req = new Request.Builder()
+                        .url(url)
+                        .build(); // post추가안하면 get형식으로 서버에서 값 받아오기
+
+                Log.d(TAG, "서버텟트2222" + req.toString() ); // method=GET, url=http://172.30.1.46:3000/
+
+
+                clnt.newCall(req)
+                        .enqueue(new Callback() {
+                            @Override
+                            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                                Log.d(TAG, "서버텟트33333실패" );
+                            }
+
+                            @Override
+                            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                                Log.d(TAG, "서버텟트33333"+response );
+                                result =  response.body().string(); // tostring()아님! string()써야함ㅇㅇㅇㅇ
+                                Log.d(TAG, "서버텟트33333"+result );
+                            }
+                        });
+
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+                Log.d(TAG, "서버텟트444실패" );
+
+
+            }
+
+        }
+
+
+
+
     }
 }
