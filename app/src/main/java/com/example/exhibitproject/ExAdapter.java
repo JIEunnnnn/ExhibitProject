@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
@@ -42,6 +42,7 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ViewHolder> {
         holder.tName.setText(mExTempArray.get(position).getName());
         holder.tTime.setText("예상 시간: "+mExTempArray.get(position).getTime());
         holder.tNum.setText("예상 인원: "+mExTempArray.get(position).getNum());
+        //holder.rImage.setImageResource(mExTempArray.get(position).getImage()); //TODO:SET IMAGE RESOURCE
         holder.setOnItemClickListener(listener);
     }
 
@@ -57,6 +58,7 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView tName, tTime ,tNum;
+        public RoundedImageView rImage;
         public CardView cv;
 
         OnItemClickListener listener;
@@ -75,7 +77,6 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ViewHolder> {
                     if(listener!=null){
                         listener.onItemClick(ViewHolder.this, itemView, position);
                     }
-                    //TODO:open details page
                 }
             });
         }

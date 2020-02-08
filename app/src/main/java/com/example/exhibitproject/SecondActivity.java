@@ -2,18 +2,25 @@ package com.example.exhibitproject;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SecondActivity extends Fragment {
-    // Store instance variables
     private String title;
     private int page;
+    private GalAdapter mGalAdapter;
+    private List<GalItem> mGalArray;
+    private LinearLayoutManager layoutManager;
 
-    // newInstance constructor for creating fragment with arguments
     public static SecondActivity newInstance(int page, String title) {
         SecondActivity fragment = new SecondActivity();
         Bundle args = new Bundle();
@@ -23,7 +30,6 @@ public class SecondActivity extends Fragment {
         return fragment;
     }
 
-    // Store instance variables based on arguments passed
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +38,33 @@ public class SecondActivity extends Fragment {
 
     }
 
-    // Inflate the view for the fragment based on layout XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.second, container, false);
         /*EditText tvLabel = (EditText) view.findViewById(R.id.editText);
         tvLabel.setText(page + " -- " + title);*/
+        RecyclerView rDetail = view.findViewById(R.id.rDetail);
+        mGalArray = new ArrayList<GalItem>();
+
+        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rDetail.setLayoutManager(layoutManager);
+
+        //------repeat------
+
+        GalItem item = new GalItem();
+        item.setTitle("title of the gallery");
+        item.setDescription("description of each gallery");
+        mGalArray.add(item);
+
+        //------------------
+
+        mGalAdapter = new GalAdapter(mGalArray);
+        rDetail.setAdapter(mGalAdapter);
+        rDetail.setItemAnimator(new DefaultItemAnimator());
+
+
         return view;
     }
 }

@@ -42,13 +42,11 @@ public class DetailsActivity extends AppCompatActivity {
             super(fragmentManager);
         }
 
-        // Returns total number of pages
         @Override
         public int getCount() {
             return NUM_ITEMS;
         }
 
-        // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
             switch (position) {
@@ -61,7 +59,6 @@ public class DetailsActivity extends AppCompatActivity {
             }
         }
 
-        // Returns the page title for the top indicator
         @Override
         public CharSequence getPageTitle(int position) {
             return "Page " + position;
