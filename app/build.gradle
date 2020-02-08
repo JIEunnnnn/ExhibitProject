@@ -32,5 +32,5 @@ dependencies {
 
 
     //서버테스트용 추가
-    implementation("com.squareup.okhttp3:okhttp:4.3.1")
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
 }

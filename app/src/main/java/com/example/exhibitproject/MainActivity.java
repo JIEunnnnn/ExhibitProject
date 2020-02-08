@@ -15,12 +15,12 @@ import okhttp3.Response;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -33,58 +33,45 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://192.168.0.27:3000";
+    public static final String url = "http://10.0.2.2:3000/";
 
-
+    static RecyclerView exList;
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    // textview httttext
-   //  TextView Data;
-   //  Button btn;
     String result;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new
+                    StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         final HttpConnection connectServ = new HttpConnection();
 
-        RecyclerView exList = findViewById(R.id.ex_list);
+        exList = findViewById(R.id.ex_list);
         mExArray = new ArrayList<ExItem>();
 
         connectServ.requestGet(url);
 
+        layoutManager = new LinearLayoutManager(MainActivity.this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        exList.setLayoutManager(layoutManager);
 
-        for(int i=0;i<5;i++){
+        /*for(int i=0;i<5;i++) {
             ExItem item = new ExItem();
-            item.setNum(0) ; // 예상인원
+            item.setNum(0); // 예상인원
             item.setTime(0); // 예상시간
             item.setName(result);
             //item.setImage();
-
-            layoutManager = new LinearLayoutManager(MainActivity.this);
-            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            exList.setLayoutManager(layoutManager);
             mExArray.add(item);
-        }
-
-        mExAdapter = new ExAdapter(mExArray);
-
-        exList.setAdapter(mExAdapter);
-        exList.setItemAnimator(new DefaultItemAnimator());
-        mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
-            @Override
-            public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
-                Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
-                intent.putExtra("NAME", ExAdapter.getItem(position).getName());
-                startActivity(intent);
-            }
-        });
-
+        }*/
 
 
     }
@@ -114,26 +101,31 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
                                 Log.d(TAG, "서버텟트33333"+response );
                                 result =  response.body().string(); // tostring()아님! string()써야함ㅇㅇㅇㅇ
-                                Log.d(TAG, "서버텟트33333"+result );
+                                Log.d(TAG, "서버텟트33333"+result);
+                                ExItem item = new ExItem();
+                                item.setName(result);
+                                mExArray.add(item);
+                                mExAdapter = new ExAdapter(mExArray);
+
+                                exList.setAdapter(mExAdapter);
+                                exList.setItemAnimator(new DefaultItemAnimator());
+                                mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
+                                    @Override
+                                    public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
+                                        Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+                                        intent.putExtra("NAME", ExAdapter.getItem(position).getName());
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         });
-
-
-
             }catch (Exception e){
                 e.printStackTrace();
                 Log.d(TAG, "서버텟트444실패" );
-
-
             }
-
         }
-
-
-
-
     }
 }
