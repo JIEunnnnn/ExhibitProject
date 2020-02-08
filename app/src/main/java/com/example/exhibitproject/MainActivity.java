@@ -109,15 +109,22 @@ public class MainActivity extends AppCompatActivity {
                                 mExArray.add(item);
                                 mExAdapter = new ExAdapter(mExArray);
 
-                                exList.setAdapter(mExAdapter);
-                                exList.setItemAnimator(new DefaultItemAnimator());
-                                mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
+                                runOnUiThread(new Runnable() {
+
                                     @Override
-                                    public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
-                                        Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
-                                        intent.putExtra("NAME", ExAdapter.getItem(position).getName());
-                                        startActivity(intent);
+                                    public void run() {
+
+                                        exList.setAdapter(mExAdapter);
+                                        exList.setItemAnimator(new DefaultItemAnimator());
+                                        mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
+                                            @Override
+                                            public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
+                                                Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+                                                intent.putExtra("NAME", ExAdapter.getItem(position).getName());
+                                                startActivity(intent);
+                                            }
+                                        });
                                     }
                                 });
                             }
