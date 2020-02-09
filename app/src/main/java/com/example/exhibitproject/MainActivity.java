@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://10.0.2.2:3000/";
+    public static final String url = "http://172.30.1.46:3000/";
 
     static RecyclerView exList;
     private static final String TAG = "OKHTTP 테스트";
