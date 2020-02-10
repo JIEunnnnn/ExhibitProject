@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://192.168.0.2:3000/";
+    public static final String url = "http://192.9.129.140:3000/";
     // 192.168.0.2
 
     static RecyclerView exList;
@@ -128,36 +128,6 @@ public class MainActivity extends AppCompatActivity {
                                //  Log.d(TAG, "서버텟트33333"+name);
                                 jsonGet(result);
 
-                                ExItem item = new ExItem();
-                                item.setName(result);
-                                mExArray.add(item);
-                                mExAdapter = new ExAdapter(mExArray);
-
-
-
-
-
-
-                                runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-
-                                        exList.setAdapter(mExAdapter);
-                                        exList.setItemAnimator(new DefaultItemAnimator());
-                                        mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
-                                            @Override
-                                            public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
-                                                Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
-                                                intent.putExtra("NAME", ExAdapter.getItem(position).getName());
-                                                startActivity(intent);
-                                            }
-                                        });
-                                    }
-                                });
-
-
                             }
                         });
 
@@ -183,15 +153,39 @@ public class MainActivity extends AppCompatActivity {
 
             for(int k=0; k<jsonar.length(); k++){
                jsonob = jsonar.getJSONObject(k);
-            }
-
                 name = jsonob.getString("name");
-                data = jsonob.getString("data");
-                detaildata = jsonob.getString("detaildata");
                 expecnum = jsonob.getInt("expecnum");
                 expectime = jsonob.getInt("expectime");
 
                 Log.d(TAG, "서버텟트33333JSONNNNN"+name);
+
+                ExItem item = new ExItem();
+                item.setName(name);
+                item.setNum(expecnum);
+                item.setTime(expectime);
+                mExArray.add(item);
+
+            }
+                mExAdapter = new ExAdapter(mExArray);
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        exList.setAdapter(mExAdapter);
+                        exList.setItemAnimator(new DefaultItemAnimator());
+                        mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
+                            @Override
+                            public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
+                                Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+                                intent.putExtra("NAME", ExAdapter.getItem(position).getName());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
 
 
             }catch (JSONException e){

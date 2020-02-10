@@ -38,7 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    public static final String url = "http://192.168.0.2:3000/";
+    public static final String url = "http://192.9.129.140:3000/";
 
     String result ;
     String name, data, detaildata; // 전시회이름, 전시회설명, 전시회내 관내용
@@ -158,14 +158,14 @@ public class DetailsActivity extends AppCompatActivity {
 
             for(int k=0; k<jsonar.length(); k++){
                 jsonob = jsonar.getJSONObject(k);
-            }
-            name = jsonob.getString("name");
-            data = jsonob.getString("data");
-            detaildata = jsonob.getString("detaildata");
-            expecnum = jsonob.getInt("expecnum");
-            expectime = jsonob.getInt("expectime");
+                name = jsonob.getString("name");
+                data = jsonob.getString("data");
+                detaildata = jsonob.getString("detaildata");
+                expecnum = jsonob.getInt("expecnum");
+                expectime = jsonob.getInt("expectime");
 
-            Log.d(TAG, "DetailActivity서버텟트33333JSONNNNN"+name);
+                Log.d(TAG, "DetailActivity서버텟트33333JSONNNNN"+name);
+            }
 
 
         }catch (JSONException e){
