@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://192.9.129.140:3000/";
+    public static final String url = "http://172.30.1.46:3000/";
     // 192.168.0.2
 
     static RecyclerView exList;
@@ -90,11 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         OkHttpClient clnt = new OkHttpClient(); // OK객체 생성
 
-
-
-
-
-
         public void requestGet(String url){  // 메소드를 생성하자.
 
             try{
@@ -112,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         .enqueue(new Callback() {
                             @Override
                             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                                Log.d(TAG, "서버텟트33333실패" );
+                                Log.d(TAG, "서버텟트33333실패"+e.getMessage() );
                             }
 
                             @Override
@@ -152,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
                 // Iterator i = jsonob.keys();
 
             for(int k=0; k<jsonar.length(); k++){
-               jsonob = jsonar.getJSONObject(k);
+
+                jsonob = jsonar.getJSONObject(k);
                 name = jsonob.getString("name");
                 expecnum = jsonob.getInt("expecnum");
                 expectime = jsonob.getInt("expectime");
@@ -181,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
                                 intent.putExtra("NAME", ExAdapter.getItem(position).getName());
+                                //intent.putExtra("EXNAME", name[position] );
                                 startActivity(intent);
                             }
                         });
