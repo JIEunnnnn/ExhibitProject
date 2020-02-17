@@ -14,6 +14,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -28,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,16 +43,21 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://172.30.1.46:3000/";
+    public static final String url = "http://172.30.1.34:3000/";
     // 192.168.0.2
 
     static RecyclerView exList;
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    AssetManager asM ;
+
     String result;
     String name, data, detaildata; // 전시회이름, 전시회설명, 전시회내 관내용
     int expecnum, expectime; // 예상인원, 예상시간
+
+    InputStream exhibit1, exhibit2  ;
+    Bitmap bm ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         exList.setLayoutManager(layoutManager);
 
+        asM = getResources().getAssets();
+       /* try{
+            exhibit1 = asM.open("exhibit1.jpg");
+            exhibit2 = asM.open("exhibit2.jpg");
+
+        }catch ( IOException e ){
+
+        }
+*/
         /*for(int i=0;i<5;i++) {
             ExItem item = new ExItem();
             item.setNum(0); // 예상인원
@@ -115,13 +133,19 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 Log.d(TAG, "서버텟트33333"+response );
+                                // input =  response.body().byteStream();
+                                // bm = BitmapFactory.decodeStream(input);
+
+                                //Log.d(TAG, "서버텟트33333"+bm);
+
+                               //  response 그림을 출력하기...?
                                 result =  response.body().string(); // tostring()아님! string()써야함ㅇㅇㅇㅇ
 
 
 
-                                Log.d(TAG, "서버텟트33333"+result);
+                               //  Log.d(TAG, "서버텟트33333"+result);
                                //  Log.d(TAG, "서버텟트33333"+name);
-                                jsonGet(result);
+                               jsonGet(result);
 
                             }
                         });
@@ -138,27 +162,45 @@ public class MainActivity extends AppCompatActivity {
                     //Value of type org.json.JSONArray cannot be converted to JSONObject
 
             try{
+
                 JSONArray jsonar = new JSONArray(result);
                 JSONObject jsonob =  new JSONObject();
 
-                Log.d(TAG, "서버텟트33333JSONNNNN"+jsonar);
-                // jsonob = new JSONObject(response.body().toString());
+                 Log.d(TAG, "서버텟트33333JSONNNNN"+jsonar);
+                 //jsonob = new JSONObject(response.body().toString());
 
                 // Iterator i = jsonob.keys();
 
-            for(int k=0; k<jsonar.length(); k++){
+           for(int k=0; k<jsonar.length(); k++){
 
                 jsonob = jsonar.getJSONObject(k);
                 name = jsonob.getString("name");
                 expecnum = jsonob.getInt("expecnum");
                 expectime = jsonob.getInt("expectime");
 
-                Log.d(TAG, "서버텟트33333JSONNNNN"+name);
+                 Log.d(TAG, "서버텟트33333JSONNNNN"+name);
 
                 ExItem item = new ExItem();
+
                 item.setName(name);
                 item.setNum(expecnum);
                 item.setTime(expectime);
+
+                if(name !=null){
+                  try{
+                      exhibit1 = asM.open(name+".jpg");
+                      Bitmap bm = BitmapFactory.decodeStream(exhibit1);
+                      item.setImage(bm);
+                      Log.d(TAG, "서버텟트333비트맵"+exhibit1);
+                      Log.d(TAG, "서버텟트333비트맵"+bm);
+
+                  }catch (IOException e){
+
+                  }
+
+           }
+
+                // item.setImage(); //  이미지를 비트맵으로 변환시켜서 받기
                 mExArray.add(item);
 
             }
@@ -185,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
+
             }catch (JSONException e){
                 Log.d(TAG, "서버텟트33333에러났냐...."+e.getMessage());
                 e.printStackTrace();
@@ -193,6 +236,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+        }
+
+        // 서버에 이미지 보내달라고 요청하기
+
+         /*
+          public void requestImg(String url){
+
+                }
+          */
+
+
+
+    }
+
+
+    void displayFiles(AssetManager as, String path ){
+        // 내가 지정한 path에 파일이 있으면 출력해야ㅣㅈ....
+        try{
+            String list[] = as.list(path);
+            if(list !=null){
+                for(int i=0; i<list.length; ++i){
+                    Log.d("Assets :", path+"/" +list[i]);
+                    displayFiles(as, path+list[i]);
+                }
+            }
+
+        }catch (IOException e){
+            Log.d(TAG, "서버텟트에세에ㅔㅇㅅ오류"+e.getMessage());
         }
     }
 }
