@@ -42,6 +42,7 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ViewHolder> {
         holder.tName.setText(mExTempArray.get(position).getName());
         holder.tTime.setText("예상 시간: "+mExTempArray.get(position).getTime());
         holder.tNum.setText("예상 인원: "+mExTempArray.get(position).getNum());
+        holder.rImage.setImageBitmap(mExTempArray.get(position).getImage());
         //holder.rImage.setImageResource(mExTempArray.get(position).getImage()); //TODO:SET IMAGE RESOURCE
         holder.setOnItemClickListener(listener);
     }
@@ -68,6 +69,7 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ViewHolder> {
             tName = (TextView) itemView.findViewById(R.id.tView_name);
             tTime = (TextView) itemView.findViewById(R.id.tView_time);
             tNum = (TextView) itemView.findViewById(R.id.tView_num);
+            rImage = (RoundedImageView) itemView.findViewById(R.id.ex_image);
             cv = (CardView) itemView.findViewById(R.id.ex_card);
 
             itemView.setOnClickListener(new View.OnClickListener(){

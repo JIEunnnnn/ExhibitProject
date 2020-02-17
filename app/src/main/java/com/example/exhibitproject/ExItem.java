@@ -1,8 +1,11 @@
 package com.example.exhibitproject;
 
+import android.graphics.Bitmap;
+
 public class ExItem {
     private int num, time;
-    private String name, image;
+    private String name ;
+    private Bitmap image ;
 
     public int getNum(){
         return num;
@@ -28,11 +31,11 @@ public class ExItem {
         this.name = name;
     }
 
-    public String getImage(){
+    public Bitmap getImage(){
         return image;
     }
 
-    public void setImage(String image){
+    public void setImage(Bitmap image){
         this.image = image;
     }
 }
