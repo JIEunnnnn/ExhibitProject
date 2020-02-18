@@ -39,13 +39,18 @@ public class DetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     public static final String url = "http://172.30.1.46:3000/";
+   //  name nownum size
 
-    String result ;
-    String name, data, detaildata; // 전시회이름, 전시회설명, 전시회내 관내용
-    String Exname;
-    int expecnum, expectime; // 예상인원, 예상시간
+    String result ; // 잘받아왔는지 전체값출력
+    String name, detaildata, firstex, secondex, thirdex, fourthex, fifthex ;  // 전시회이름, 전시회설명, 전시회내 관내용
+    String Exname; // 서버로 post보낼때 필요한 ....
+    int nownum, size ; // 현재인원, 관크기
+    //firstex secondex, thirdex, fourtex nownum size name detaildata
+    //// 이름 현재인원수 전시회자세한설명 관크기 전시회 내의 관별 설명 3/4
 
+   // 여기 수정하기
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,6 +173,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void jsonGet(String res){
 
+
+
+        //firstex secondex, thirdex, fourtex nownum size name detaildata
+        //// 이름 현재인원수 전시회자세한설명 관크기 전시회 내의 관별 설명 3/4
+
         try{
             JSONArray jsonar = new JSONArray(res);
             JSONObject jsonob =  new JSONObject();
@@ -177,16 +187,24 @@ public class DetailsActivity extends AppCompatActivity {
                 jsonob = jsonar.getJSONObject(k);
             }
                     name = jsonob.getString("name");
-
-                    data = jsonob.getString("data");
-                    detaildata = jsonob.getString("detaildata");
-                    expecnum = jsonob.getInt("expecnum");
-                    expectime = jsonob.getInt("expectime");
-
-
+                   detaildata = jsonob.getString("detaildata");
+                    firstex = jsonob.getString("firstex");
+                    secondex = jsonob.getString("secondex");
+                    thirdex = jsonob.getString("thirdex");
+                    fourthex = jsonob.getString("fourthex");
 
 
-            Log.d(TAG, "DetailActivity서버텟트33333JSONNNNN"+Exname+data+detaildata+expecnum+expectime);
+                  nownum = jsonob.getInt("nownum");
+                  size = jsonob.getInt("size");
+            Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
+
+
+
+                    // if fifth 없으면....그냥넘어가도록수행.....
+
+
+
+         //   Log.d(TAG, "DetailActivity서버텟트33333JSONNNNN"+Exname+data+detaildata+expecnum+expectime);
 
         }catch (JSONException e){
             Log.d(TAG, "DetailActivity서버텟트33333에러났냐...."+e.getMessage());
