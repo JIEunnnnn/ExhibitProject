@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://172.30.1.46:3000/";
+    public static final String url = "http://172.30.1.14:3000/";
     // 192.168.0.2
 
     static RecyclerView exList;
@@ -102,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
 
+        //------------
+        Button btnT = findViewById(R.id.button_t);
+        btnT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     class HttpConnection {
@@ -219,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
                                 intent.putExtra("NAME", ExAdapter.getItem(position).getName());
+                                intent.putExtra("MAP", position);
                                 //intent.putExtra("EXNAME", name[position] );
                                 startActivity(intent);
                             }
