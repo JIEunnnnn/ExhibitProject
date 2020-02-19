@@ -32,6 +32,13 @@ import static com.example.exhibitproject.MainActivity.JSON;
 import static com.example.exhibitproject.MainActivity.url;
 import static java.sql.Types.NULL;
 
+// 내일할일 서버합치고 데이터맵핑 확인도하고
+//
+// 내일 => 혼잡도색깔나타내고 경로그리고
+// 업데이트시키는거 ㅇㅇ !
+// db변경하고
+//
+// 목요일날 : 맵액티비티, 상세페이지 정보화면ㅁ만 나타내는거 ㅇㅇ!
 public class DetailsActivity extends AppCompatActivity {
     private ViewPager2 vpPager;
     FragmentPagerAdapter adapterViewPager;
@@ -196,7 +203,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                   nownum = jsonob.getInt("nownum");
                   size = jsonob.getInt("size");
-            Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
+                  Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
 
 
 
