@@ -47,13 +47,13 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String url = "http://172.30.1.46:3000/";
+    public static final String url = "http://172.30.1.14:3000/";
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
     String name, detaildata, firstex, secondex, thirdex, fourthex, fifthex ;  // 전시회이름, 전시회설명, 전시회내 관내용
     String Exname; // 서버로 post보낼때 필요한 ....
-    int nownum, size ; // 현재인원, 관크기
+    int nownum, size, mapNum ; // 현재인원, 관크기
     //firstex secondex, thirdex, fourtex nownum size name detaildata
     //// 이름 현재인원수 전시회자세한설명 관크기 전시회 내의 관별 설명 3/4
 
@@ -67,10 +67,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Exname = intent.getStringExtra("NAME");
+        mapNum = intent.getIntExtra("MAP", 1);
         // String Exname = intent.getStringExtra("EXNAME");
          Log.d(TAG, "DetailActivityy서버텟트11111" + Exname);
-        TextView dName = findViewById(R.id.tView_detail_name);
-        dName.setText(Exname);
+        //TextView dName = findViewById(R.id.tView_detail_name);
+        //dName.setText(Exname);
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.vPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
