@@ -45,10 +45,10 @@ public class SecondActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Context contextTheme = new ContextThemeWrapper(getActivity(),R.style.AppTheme);
-        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextTheme);
+        /*Context contextTheme = new ContextThemeWrapper(getActivity(),R.style.AppTheme);
+        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextTheme);*/
 
-        View view = localInflater.inflate(R.layout.second, container, false);
+        View view = inflater.inflate(R.layout.second, container, false);
         RecyclerView rDetail = view.findViewById(R.id.rDetail);
         mGalArray = new ArrayList<GalItem>();
 
