@@ -20,7 +20,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="전시회 리스트" />
+            android:label="전시회 리스트"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

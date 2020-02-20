@@ -3,4 +3,11 @@
     <string name="exhibition_name">Exhibition Name</string>
     <string name="ex_time">예상 시간: 00분</string>
     <string name="ex_num">예상 인원: 00명</string>
+    <string name="m_title">예술의전당</string>
+    <string name="m_des">예술의전당은 예술 프로그램의 창조적 활성화를 통해 문화가 있는 삶을 제공하고 국가의 문화융성에 기여하는 선도적 복합문화예술 기관입니다.</string>
+    <string name="m_time">관람시간</string>
+    <string name="m_addr">주소</string>
+    <string name="m_t_d">매주 09:00 - 17:00\n매월 마지막주 월요일 휴관</string>
+    <string name="m_a_d">도로명: 서울시 서초구 남부순환로 2406 \n예술의전당 (우 06757) \n지번: 서울시 서초구 서초동 700번</string>지
+    <string name="m_list">전시회 목록</string>
 </resources>

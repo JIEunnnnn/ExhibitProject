@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // connectServ.jsonGet(url);
 
         layoutManager = new LinearLayoutManager(MainActivity.this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         exList.setLayoutManager(layoutManager);
 
         asM = getResources().getAssets();
@@ -92,25 +92,29 @@ public class MainActivity extends AppCompatActivity {
 
         }
 */
-        /*for(int i=0;i<5;i++) {
+        for(int i=0;i<5;i++) {
             ExItem item = new ExItem();
             item.setNum(0); // 예상인원
             item.setTime(0); // 예상시간
             item.setName(result);
             //item.setImage();
             mExArray.add(item);
-        }*/
+        }
+
+        mExAdapter = new ExAdapter(mExArray);
+        exList.setAdapter(mExAdapter);
+        exList.setItemAnimator(new DefaultItemAnimator());
 
 
-        //------------
-        Button btnT = findViewById(R.id.button_t);
+        //------------test btn
+        /*Button btnT = findViewById(R.id.button_t);
         btnT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     class HttpConnection {
