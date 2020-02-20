@@ -236,7 +236,7 @@ public class DetailsActivity extends AppCompatActivity {
             firstex = firstex.replace("]", "");
             fs = firstex.split(",");
 
-            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+fs[0]);
+
 
             secondex = secondex.replace("[", "");
             secondex = secondex.replace("]", "");
@@ -249,6 +249,7 @@ public class DetailsActivity extends AppCompatActivity {
             fourthex = fourthex.replace("[","");
             fourthex = fourthex.replace("]","");
             fs2 =fourthex.split(",");
+
 
 
             Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");

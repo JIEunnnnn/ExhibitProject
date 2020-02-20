@@ -55,10 +55,10 @@ public class FirstActivity extends Fragment {
         tvLabel.setText(page + " -- " + title);*/
 
         //get data from details activity
-        String firstex = ((DetailsActivity)getActivity()).firstex;
-        String secondex = ((DetailsActivity)getActivity()).secondex;
-        String thirdex = ((DetailsActivity)getActivity()).thirdex;
-        String fourthex = ((DetailsActivity)getActivity()).fourthex;
+        String[] fs = ((DetailsActivity)getActivity()).fs; // 관내인원
+        String[] ss = ((DetailsActivity)getActivity()).ss; // 관내크기
+        String[] ts = ((DetailsActivity)getActivity()).ts; // 관이름
+        String[] fs2 = ((DetailsActivity)getActivity()).fs2; // 관분할
         //int nownum = ((DetailsActivity)getActivity()).nownum;
         //int size = ((DetailsActivity)getActivity()).size;
         int mapNum = ((DetailsActivity)getActivity()).mapNum;
