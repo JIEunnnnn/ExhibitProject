@@ -41,19 +41,19 @@ import static java.sql.Types.NULL;
 //
 // 목요일날 : 맵액티비티, 상세페이지 정보화면ㅁ만 나타내는거 ㅇㅇ!
 public class DetailsActivity extends AppCompatActivity {
-    private ViewPager2 vpPager;
+    //private ViewPager2 vpPager;
     FragmentPagerAdapter adapterViewPager;
     private WormDotsIndicator indicator;
 
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String url = "http://:172.30.1.46:3000/";
+    public static final String url = "http://172.30.1.46:3000/";
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
-    String data, detaildata, firstex, secondex, thirdex, fourthex ;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
-    String Exname; // 서버로 post보낼때 필요한 ....
+    String title, data, detaildata, g_name, g_size, g_people, g_des, g_guide;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
+    String Exname, imageNum; // 서버로 post보낼때 필요한 ....
     int  mapNum ; // intent넘기는거 구분하는 변수
     int[] exhbitpeople, exhibitsize ;
     //firstex secondex, thirdex, fourtex nownum size name detaildata
@@ -63,6 +63,7 @@ public class DetailsActivity extends AppCompatActivity {
     String[] ss = new String[4]; // 관내크기 분할
     String[] ts = new String[4]; // 관이름 분할
     String[] fs2 = new String[4]; // 관내자세한설명 분할
+    String[] gs = new String[2]; //가이드 정보
 
    // 여기 수정하기
     @Override
@@ -75,6 +76,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Exname = intent.getStringExtra("NAME");
         mapNum = intent.getIntExtra("MAP", 1);
+        imageNum = intent.getStringExtra("IMAGENAME");
         // String Exname = intent.getStringExtra("EXNAME");
          Log.d(TAG, "DetailActivityy서버텟트11111" + Exname);
         //TextView dName = findViewById(R.id.tView_detail_name);
@@ -92,7 +94,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 2;
+        private static int NUM_ITEMS = 3;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -107,9 +109,11 @@ public class DetailsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return FirstActivity.newInstance(0, "Page # 1");
+                    return ZeroActivity.newInstance(0, "Page # 1");
                 case 1:
-                    return SecondActivity.newInstance(1, "Page # 2");
+                    return FirstActivity.newInstance(1, "Page # 2");
+                case 2:
+                    return SecondActivity.newInstance(2, "Page # 3");
                 default:
                     return null;
             }
@@ -216,45 +220,39 @@ public class DetailsActivity extends AppCompatActivity {
             for(int k=0; k<jsonar.length(); k++) {
                 jsonob = jsonar.getJSONObject(k);
             }
+                    title = jsonob.getString("title");
                     data = jsonob.getString("data");
                    detaildata = jsonob.getString("detaildata");
                    // exhibitpeople exhibitsize exhibitname exhibitdetaildaa
 
-                    firstex = jsonob.getString("exhibitpeople"); // 관내인원수
-                    secondex = jsonob.getString("exhibitsize"); // 관크기
-                    thirdex = jsonob.getString("exhibitname"); // 관이름
-                    fourthex = jsonob.getString("exhibitdetaildata"); // 관내 자세한설명
+                    g_people = jsonob.getString("exhibitpeople"); // 관내인원수
+                    g_size = jsonob.getString("exhibitsize"); // 관크기
+                    g_name = jsonob.getString("exhibitname"); // 관이름
+                    g_des = jsonob.getString("exhibitdetaildata"); // 관내 자세한설명
+                    g_guide = jsonob.getString("guidedata");
 
-            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+firstex);
-            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+secondex);
-            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+thirdex);
-            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+fourthex);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_people);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_size);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_name);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_des);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_guide);
 
+            g_people = g_people.replace("[", "").replace("]","");
+            fs = g_people.split(",");
 
+            g_size = g_size.replace("[", "").replace("]","");
+            ss = g_size.split(",");
 
-            firstex = firstex.replace("[", "");
-            firstex = firstex.replace("]", "");
-            fs = firstex.split(",");
+            g_name = g_name.replace("[", "").replace("]","");
+            ts =  g_name.split(",");
 
+            g_des = g_des.replace("[","").replace("]","");
+            fs2 =g_des.split(",");
 
-
-            secondex = secondex.replace("[", "");
-            secondex = secondex.replace("]", "");
-            ss = secondex.split(",");
-
-            thirdex = thirdex.replace("[", "");
-            thirdex = thirdex.replace("]", "");
-            ts = thirdex.split(",");
-
-            fourthex = fourthex.replace("[","");
-            fourthex = fourthex.replace("]","");
-            fs2 =fourthex.split(",");
-
-
+            g_guide = g_guide.replace("[","").replace("]","");
+            gs = g_guide.split(",");
 
             Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
-
-
 
         }catch (JSONException e){
             Log.d(TAG, "DetailActivity서버텟트33333에러났냐...."+e.getMessage());

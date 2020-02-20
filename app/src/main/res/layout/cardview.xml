@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ex_card"
-    android:layout_width="300dp"
+    android:layout_width="230dp"
     android:layout_height="300dp"
 
     app:cardCornerRadius="20dp"
@@ -31,7 +31,6 @@
         android:shadowDx="15.0"
         android:shadowDy="15.0"
         android:shadowRadius="7.0"
-        android:text="@string/exhibition_name"
         android:textColor="#fff"
         android:textSize="30sp"
         android:textStyle="bold"

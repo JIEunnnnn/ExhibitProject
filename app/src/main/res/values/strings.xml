@@ -8,6 +8,8 @@
     <string name="m_time">관람시간</string>
     <string name="m_addr">주소</string>
     <string name="m_t_d">매주 09:00 - 17:00\n매월 마지막주 월요일 휴관</string>
-    <string name="m_a_d">도로명: 서울시 서초구 남부순환로 2406 \n예술의전당 (우 06757) \n지번: 서울시 서초구 서초동 700번</string>지
+    <string name="m_a_d">도로명: 서울시 서초구 남부순환로 2406 \n예술의전당 (우 06757) \n지번: 서울시 서초구 서초동 700번지</string>
     <string name="m_list">전시회 목록</string>
+    <string name="g_docent">도슨트 운영</string>
+    <string name="g_des">전시소개</string>
 </resources>
