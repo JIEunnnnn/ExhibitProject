@@ -243,10 +243,10 @@ public class DetailsActivity extends AppCompatActivity {
             g_size = g_size.replace("[", "").replace("]","");
             ss = g_size.split(",");
 
-            g_name = g_name.replace("[", "").replace("]","");
+            g_name = g_name.replace("[", "").replace("]","").replaceAll("\"","");
             ts =  g_name.split(",");
 
-            g_des = g_des.replace("[","").replace("]","");
+            g_des = g_des.replace("[","").replace("]","").replaceAll("\"","");
             fs2 =g_des.split(",");
 
             g_guide = g_guide.replace("[","").replace("]","");

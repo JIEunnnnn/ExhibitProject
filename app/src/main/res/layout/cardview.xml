@@ -5,10 +5,8 @@
     android:id="@+id/ex_card"
     android:layout_width="230dp"
     android:layout_height="300dp"
-
     app:cardCornerRadius="20dp"
     app:cardUseCompatPadding="true">
-    <!--    android:layout_margin="10dp"-->
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/ex_image"
