@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://192.168.43.241:3000/";
+    public static final String url = "http://172.30.1.46:3000/";
     // 192.168.0.2
 
     static RecyclerView exList;

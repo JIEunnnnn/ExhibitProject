@@ -48,7 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String url = "http://192.168.43.241:3000/";
+    public static final String url = "http://:172.30.1.46:3000/";
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
