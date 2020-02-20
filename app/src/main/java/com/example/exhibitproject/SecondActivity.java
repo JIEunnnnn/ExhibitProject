@@ -51,7 +51,8 @@ public class SecondActivity extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rDetail.setLayoutManager(layoutManager);
 
-        String name = ((DetailsActivity)getActivity()).name;
+        String name = ((DetailsActivity)getActivity()).data;
+        
         String detaildata = ((DetailsActivity)getActivity()).detaildata;
         //TODO:베열로 받아와야 할것 같은데..?
 

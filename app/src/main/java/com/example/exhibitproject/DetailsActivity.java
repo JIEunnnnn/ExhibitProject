@@ -52,7 +52,7 @@ public class DetailsActivity extends AppCompatActivity {
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
-    String name, detaildata, firstex, secondex, thirdex, fourthex ;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
+    String data, detaildata, firstex, secondex, thirdex, fourthex ;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
     String Exname; // 서버로 post보낼때 필요한 ....
     int  mapNum ; // intent넘기는거 구분하는 변수
     int[] exhbitpeople, exhibitsize ;
@@ -216,7 +216,7 @@ public class DetailsActivity extends AppCompatActivity {
             for(int k=0; k<jsonar.length(); k++) {
                 jsonob = jsonar.getJSONObject(k);
             }
-                    name = jsonob.getString("name");
+                    data = jsonob.getString("data");
                    detaildata = jsonob.getString("detaildata");
                    // exhibitpeople exhibitsize exhibitname exhibitdetaildaa
 
