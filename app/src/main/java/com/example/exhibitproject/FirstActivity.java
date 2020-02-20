@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 
 
 public class FirstActivity extends Fragment {
@@ -60,8 +59,8 @@ public class FirstActivity extends Fragment {
         String secondex = ((DetailsActivity)getActivity()).secondex;
         String thirdex = ((DetailsActivity)getActivity()).thirdex;
         String fourthex = ((DetailsActivity)getActivity()).fourthex;
-        int nownum = ((DetailsActivity)getActivity()).nownum;
-        int size = ((DetailsActivity)getActivity()).size;
+        //int nownum = ((DetailsActivity)getActivity()).nownum;
+        //int size = ((DetailsActivity)getActivity()).size;
         int mapNum = ((DetailsActivity)getActivity()).mapNum;
         int[][] pointer = {{265, 500}, {476,268}, {80, 310}, {355, 85}};
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();

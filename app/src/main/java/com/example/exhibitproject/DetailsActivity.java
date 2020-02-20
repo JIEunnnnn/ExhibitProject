@@ -27,11 +27,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 import static com.example.exhibitproject.MainActivity.JSON;
 import static com.example.exhibitproject.MainActivity.url;
 import static java.sql.Types.NULL;
 
+// 내일할일 서버합치고 데이터맵핑 확인도하고
+//
+// 내일 => 혼잡도색깔나타내고 경로그리고
+// 업데이트시키는거 ㅇㅇ !
+// db변경하고
+//
+// 목요일날 : 맵액티비티, 상세페이지 정보화면ㅁ만 나타내는거 ㅇㅇ!
 public class DetailsActivity extends AppCompatActivity {
     private ViewPager2 vpPager;
     FragmentPagerAdapter adapterViewPager;
@@ -40,15 +48,21 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String url = "http://172.30.1.14:3000/";
+    public static final String url = "http://192.168.43.241:3000/";
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
-    String name, detaildata, firstex, secondex, thirdex, fourthex, fifthex ;  // 전시회이름, 전시회설명, 전시회내 관내용
+    String name, detaildata, firstex, secondex, thirdex, fourthex ;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
     String Exname; // 서버로 post보낼때 필요한 ....
-    int nownum, size, mapNum ; // 현재인원, 관크기
+    int  mapNum ; // intent넘기는거 구분하는 변수
+    int[] exhbitpeople, exhibitsize ;
     //firstex secondex, thirdex, fourtex nownum size name detaildata
     //// 이름 현재인원수 전시회자세한설명 관크기 전시회 내의 관별 설명 3/4
+
+    String[] fs = new String[4]; // 관내인원 분할
+    String[] ss = new String[4]; // 관내크기 분할
+    String[] ts = new String[4]; // 관이름 분할
+    String[] fs2 = new String[4]; // 관내자세한설명 분할
 
    // 여기 수정하기
     @Override
@@ -174,6 +188,13 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void jsonGet(String res){
 
+        //result[{"exhibitpeople":[10,3,6,9],"exhibitsize":[100,300,60,900],"exhibitname":["number1","number2","number3","number4"],
+        // "exhibitdetaildata":["1ㄱ임","2관과임","3관ㄱ과임","4관임임"],"name":"exhibit1","detaildata":"전시고고1관"}]
+
+        // String result ; // 잘받아왔는지 전체값출력
+        // String name, detaildata, firstex, secondex, thirdex, fourthex, fifthex ;  // 전시회이름, 전시회설명, 전시회내 관내용
+        // String Exname; // 서버로 post보낼때 필요한 ....
+        // int nownum, size, mapNum ; // 현재인원, 관크기
 
 
         //firstex secondex, thirdex, fourtex nownum size name detaildata
@@ -184,28 +205,55 @@ public class DetailsActivity extends AppCompatActivity {
             JSONObject jsonob =  new JSONObject();
             Log.d(TAG, "DetailActivity서버텟트33333"+jsonar );
 
+            //JSONArray JsonArray = (JSONArray) genreJsonObject.get("resultList");
+           //  JSONObject a = (JSONObject) JsonArray.get(0);
+            // JSONObject b = (JSONObject) JsonArray.get(1);
+            Object js = jsonar.getJSONObject(0);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+js);
+
+
+
             for(int k=0; k<jsonar.length(); k++) {
                 jsonob = jsonar.getJSONObject(k);
             }
                     name = jsonob.getString("name");
                    detaildata = jsonob.getString("detaildata");
-                    firstex = jsonob.getString("firstex");
-                    secondex = jsonob.getString("secondex");
-                    thirdex = jsonob.getString("thirdex");
-                    fourthex = jsonob.getString("fourthex");
+                   // exhibitpeople exhibitsize exhibitname exhibitdetaildaa
+
+                    firstex = jsonob.getString("exhibitpeople"); // 관내인원수
+                    secondex = jsonob.getString("exhibitsize"); // 관크기
+                    thirdex = jsonob.getString("exhibitname"); // 관이름
+                    fourthex = jsonob.getString("exhibitdetaildata"); // 관내 자세한설명
+
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+firstex);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+secondex);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+thirdex);
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+fourthex);
 
 
-                  nownum = jsonob.getInt("nownum");
-                  size = jsonob.getInt("size");
+
+            firstex = firstex.replace("[", "");
+            firstex = firstex.replace("]", "");
+            fs = firstex.split(",");
+
+            Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+fs[0]);
+
+            secondex = secondex.replace("[", "");
+            secondex = secondex.replace("]", "");
+            ss = secondex.split(",");
+
+            thirdex = thirdex.replace("[", "");
+            thirdex = thirdex.replace("]", "");
+            ts = thirdex.split(",");
+
+            fourthex = fourthex.replace("[","");
+            fourthex = fourthex.replace("]","");
+            fs2 =fourthex.split(",");
+
+
             Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
 
 
-
-                    // if fifth 없으면....그냥넘어가도록수행.....
-
-
-
-         //   Log.d(TAG, "DetailActivity서버텟트33333JSONNNNN"+Exname+data+detaildata+expecnum+expectime);
 
         }catch (JSONException e){
             Log.d(TAG, "DetailActivity서버텟트33333에러났냐...."+e.getMessage());
