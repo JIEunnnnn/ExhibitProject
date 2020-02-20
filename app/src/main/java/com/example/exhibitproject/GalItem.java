@@ -1,7 +1,7 @@
 package com.example.exhibitproject;
 
 public class GalItem {
-    private String title, description, image;
+    private String title, description;
 
     public String getTitle() {
         return title;
@@ -17,13 +17,5 @@ public class GalItem {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImage(){
-        return image;
-    }
-
-    public void setImage(String image){
-        this.image = image;
     }
 }

@@ -21,7 +21,7 @@
         <activity
             android:name=".MainActivity"
             android:label="전시회 리스트"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".DetailsActivity"
-            android:label="전시 상세보기" />
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

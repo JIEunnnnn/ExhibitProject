@@ -56,7 +56,6 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        public ImageView iGal;
         public TextView tTitle, tDescription;
         public CardView cv;
 
@@ -64,7 +63,6 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
 
         public ViewHolder(final View itemView){
             super(itemView);
-            iGal = (ImageView) itemView.findViewById(R.id.iView_gallery);
             tTitle = (TextView) itemView.findViewById(R.id.tView_gallery_title);
             tDescription = (TextView) itemView.findViewById(R.id.tView_gallery_description);
             cv = (CardView) itemView.findViewById(R.id.gal_card);

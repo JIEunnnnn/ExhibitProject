@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://192.168.43.241:3000/";
+    public static final String url = "http://172.30.1.46:3000/";
     // 192.168.0.2
 
     static RecyclerView exList;
@@ -84,22 +84,11 @@ public class MainActivity extends AppCompatActivity {
         exList.setLayoutManager(layoutManager);
 
         asM = getResources().getAssets();
-       /* try{
-            exhibit1 = asM.open("exhibit1.jpg");
-            exhibit2 = asM.open("exhibit2.jpg");
-
-        }catch ( IOException e ){
-
-        }
-*/
-        for(int i=0;i<5;i++) {
             ExItem item = new ExItem();
             item.setNum(0); // 예상인원
             item.setTime(0); // 예상시간
             item.setName(result);
-            //item.setImage();
             mExArray.add(item);
-        }
 
         mExAdapter = new ExAdapter(mExArray);
         exList.setAdapter(mExAdapter);
@@ -233,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
                                 intent.putExtra("NAME", ExAdapter.getItem(position).getName());
                                 intent.putExtra("MAP", position);
+                                intent.putExtra("IMAGENAME",ExAdapter.getItem(position).getName());
                                 //intent.putExtra("EXNAME", name[position] );
                                 startActivity(intent);
                             }

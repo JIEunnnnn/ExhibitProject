@@ -1,11 +1,13 @@
 package com.example.exhibitproject;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +40,15 @@ public class SecondActivity extends Fragment {
 
     }
 
+    String[] name, detail;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.second, container, false);
-        /*EditText tvLabel = (EditText) view.findViewById(R.id.editText);
-        tvLabel.setText(page + " -- " + title);*/
+        Context contextTheme = new ContextThemeWrapper(getActivity(),R.style.AppTheme);
+        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextTheme);
+
+        View view = localInflater.inflate(R.layout.second, container, false);
         RecyclerView rDetail = view.findViewById(R.id.rDetail);
         mGalArray = new ArrayList<GalItem>();
 
@@ -51,18 +56,19 @@ public class SecondActivity extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rDetail.setLayoutManager(layoutManager);
 
-        String name = ((DetailsActivity)getActivity()).name;
-        String detaildata = ((DetailsActivity)getActivity()).detaildata;
-        //TODO:베열로 받아와야 할것 같은데..?
+        name = ((DetailsActivity)getActivity()).ts;
+        detail = ((DetailsActivity)getActivity()).fs2;
+
 
 
         //------repeat------
-
-        GalItem item = new GalItem();
-        item.setTitle(name);
-        item.setDescription(detaildata);
-        mGalArray.add(item);
-
+        for(int i=0; i< name.length;i++)
+        {
+            GalItem item = new GalItem();
+            item.setTitle(name[i]);
+            item.setDescription(detail[i]);
+            mGalArray.add(item);
+        }
         //------------------
 
         mGalAdapter = new GalAdapter(mGalArray);

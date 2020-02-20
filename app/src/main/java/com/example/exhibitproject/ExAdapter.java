@@ -39,11 +39,10 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tName.setText(mExTempArray.get(position).getName());
+        //holder.tName.setText(mExTempArray.get(position).getName());
         holder.tTime.setText("예상 시간: "+mExTempArray.get(position).getTime());
         holder.tNum.setText("예상 인원: "+mExTempArray.get(position).getNum());
         holder.rImage.setImageBitmap(mExTempArray.get(position).getImage());
-        //holder.rImage.setImageResource(mExTempArray.get(position).getImage()); //TODO:SET IMAGE RESOURCE
         holder.setOnItemClickListener(listener);
     }
 
