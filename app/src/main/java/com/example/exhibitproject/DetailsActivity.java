@@ -41,7 +41,7 @@ import static java.sql.Types.NULL;
 //
 // 목요일날 : 맵액티비티, 상세페이지 정보화면ㅁ만 나타내는거 ㅇㅇ!
 public class DetailsActivity extends AppCompatActivity {
-    private ViewPager2 vpPager;
+    //private ViewPager2 vpPager;
     FragmentPagerAdapter adapterViewPager;
     private WormDotsIndicator indicator;
 
@@ -92,7 +92,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 2;
+        private static int NUM_ITEMS = 3;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -107,9 +107,11 @@ public class DetailsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return FirstActivity.newInstance(0, "Page # 1");
+                    return ZeroActivity.newInstance(0, "Page # 1");
                 case 1:
-                    return SecondActivity.newInstance(1, "Page # 2");
+                    return FirstActivity.newInstance(1, "Page # 2");
+                case 2:
+                    return SecondActivity.newInstance(2, "Page # 3");
                 default:
                     return null;
             }
