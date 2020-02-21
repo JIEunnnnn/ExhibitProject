@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="30dp">
 
-    <android.support.v7.widget.Toolbar
+    <!--<android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_custom_first"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background = "@color/colorPrimary"/>
+        android:background = "@color/colorPrimary"/>-->
 
     <ImageView
         android:id="@+id/mapView"

@@ -1,7 +1,11 @@
 package com.example.exhibitproject;
 
+import android.graphics.Bitmap;
+
 public class GalItem {
-    private String title, description;
+    private String description;
+    private Bitmap picture;
+    private String title;
 
     public String getTitle() {
         return title;
@@ -17,5 +21,13 @@ public class GalItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Bitmap getPicture(){
+        return picture;
+    }
+
+    public void setPicture(Bitmap picture){
+        this.picture = picture;
     }
 }

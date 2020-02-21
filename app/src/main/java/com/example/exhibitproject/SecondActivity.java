@@ -1,17 +1,23 @@
 package com.example.exhibitproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,15 +46,16 @@ public class SecondActivity extends Fragment {
 
     }
 
-    String[] name, detail;
+    String[] name, name1, detail, pic;
+    InputStream exhibit1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Context contextTheme = new ContextThemeWrapper(getActivity(),R.style.AppTheme);
-        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextTheme);
+        /*Context contextTheme = new ContextThemeWrapper(getActivity(),R.style.AppTheme);
+        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextTheme);*/
 
-        View view = localInflater.inflate(R.layout.second, container, false);
+        View view = inflater.inflate(R.layout.second, container, false);
         RecyclerView rDetail = view.findViewById(R.id.rDetail);
         mGalArray = new ArrayList<GalItem>();
 
@@ -58,6 +65,7 @@ public class SecondActivity extends Fragment {
 
         name = ((DetailsActivity)getActivity()).ts;
         detail = ((DetailsActivity)getActivity()).fs2;
+        pic = ((DetailsActivity)getActivity()).ps;
 
 
 
@@ -67,6 +75,17 @@ public class SecondActivity extends Fragment {
             GalItem item = new GalItem();
             item.setTitle(name[i]);
             item.setDescription(detail[i]);
+            if(pic[i]!=null) {
+                try {
+                    exhibit1 = getResources().getAssets().open(pic[i] + ".png");
+                    Bitmap bm = BitmapFactory.decodeStream(exhibit1);
+                    item.setPicture(bm);
+
+                } catch (IOException e) {
+
+                }
+            }
+
             mGalArray.add(item);
         }
         //------------------
