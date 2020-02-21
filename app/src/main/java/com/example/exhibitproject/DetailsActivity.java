@@ -53,6 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     String result ; // 잘받아왔는지 전체값출력
     String title, data, detaildata, g_name, g_size, g_people, g_des, g_guide;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
+    String g_picture ; // 전시회그림정보
     String Exname, imageNum; // 서버로 post보낼때 필요한 ....
     int  mapNum ; // intent넘기는거 구분하는 변수
     int[] exhbitpeople, exhibitsize ;
@@ -64,6 +65,7 @@ public class DetailsActivity extends AppCompatActivity {
     String[] ts = new String[4]; // 관이름 분할
     String[] fs2 = new String[4]; // 관내자세한설명 분할
     String[] gs = new String[2]; //가이드 정보
+    String[] ps = new String[4] ; // 그림 정보
 
    // 여기 수정하기
     @Override
@@ -230,6 +232,7 @@ public class DetailsActivity extends AppCompatActivity {
                     g_name = jsonob.getString("exhibitname"); // 관이름
                     g_des = jsonob.getString("exhibitdetaildata"); // 관내 자세한설명
                     g_guide = jsonob.getString("guidedata");
+                    g_picture= jsonob.getString("exhibitpicture"); //  그림정보
 
             Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_people);
             Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+g_size);
@@ -251,6 +254,10 @@ public class DetailsActivity extends AppCompatActivity {
 
             g_guide = g_guide.replace("[","").replace("]","");
             gs = g_guide.split(",");
+
+
+            g_picture = g_picture.replace("[","").replace("]","");
+            ps = g_picture.split(",");
 
             Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
 
