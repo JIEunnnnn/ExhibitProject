@@ -15,6 +15,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -91,6 +92,9 @@ public class DetailsActivity extends AppCompatActivity {
 
         final HttpConnection connectServ = new HttpConnection();
         connectServ.requestGet(url);
+        /*FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+        ft.detach(R.layout.zero).attach(this).commit();*/
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {

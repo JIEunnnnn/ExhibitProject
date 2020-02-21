@@ -71,7 +71,7 @@ public class FirstActivity extends Fragment {
         Bitmap bitmap = Bitmap.createBitmap( width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         BitmapDrawable bd = null;
-        bd = (BitmapDrawable) getResources().getDrawable(R.drawable.map4,null);
+        bd = (BitmapDrawable) getResources().getDrawable(R.drawable.map2,null);
         Bitmap bit = Bitmap.createScaledBitmap(bd.getBitmap(), width, height, true);
         canvas.drawColor(Color.TRANSPARENT);
         canvas.drawBitmap(bit,0,0,null);
