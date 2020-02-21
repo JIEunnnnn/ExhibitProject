@@ -1,6 +1,5 @@
 
-# AZURE Computer Vision API를 활용한
-# 전시회 최적경로 추천 서비스 
+# AZURE Computer Vision API를 활용한<br> 전시회 최적경로 추천 서비스 
 
 
 ## 0. 팀소개 및 멤버구성 
