@@ -48,12 +48,11 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String url = "http://172.30.1.46:3000/";
+    public static final String url = "http://172.16.101.59:3000/";
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
-    String title, data, detaildata, g_name, g_size, g_people, g_des, g_guide;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명
-    String g_picture ; // 전시회그림정보
+    String title, data, detaildata, g_name, g_size, g_people, g_des, g_guide, g_picture;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명, 전시회 그림설명
     String Exname, imageNum; // 서버로 post보낼때 필요한 ....
     int  mapNum ; // intent넘기는거 구분하는 변수
     int[] exhbitpeople, exhibitsize ;
@@ -252,11 +251,11 @@ public class DetailsActivity extends AppCompatActivity {
             g_des = g_des.replace("[","").replace("]","").replaceAll("\"","");
             fs2 =g_des.split(",");
 
-            g_guide = g_guide.replace("[","").replace("]","");
+            g_guide = g_guide.replace("[","").replace("]","").replaceAll("\"","");
             gs = g_guide.split(",");
 
 
-            g_picture = g_picture.replace("[","").replace("]","");
+            g_picture = g_picture.replace("[","").replace("]","").replaceAll("\"","");
             ps = g_picture.split(",");
 
             Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
