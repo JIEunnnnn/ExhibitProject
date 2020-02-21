@@ -5,13 +5,13 @@ import android.graphics.Bitmap;
 public class GalItem {
     private String description;
     private Bitmap picture;
-    private String[] title;
+    private String title;
 
-    public String[] getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String[] title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

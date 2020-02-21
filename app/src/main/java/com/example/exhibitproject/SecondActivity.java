@@ -72,10 +72,8 @@ public class SecondActivity extends Fragment {
         //------repeat------
         for(int i=0; i< name.length;i++)
         {
-
-            name1 = name[i].split("/");
             GalItem item = new GalItem();
-            item.setTitle(name1);
+            item.setTitle(name[i]);
             item.setDescription(detail[i]);
             if(pic[i]!=null) {
                 try {

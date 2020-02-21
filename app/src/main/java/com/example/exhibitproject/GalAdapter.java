@@ -41,9 +41,10 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tTitle.setText(mGalTempArray.get(position).getTitle()[1]);
-        holder.tSection.setText(mGalTempArray.get(position).getTitle()[0]);
-        holder.tEngTitle.setText(mGalTempArray.get(position).getTitle()[2]);
+        String[] title = mGalTempArray.get(position).getTitle().split("!");
+        holder.tTitle.setText(title[1]);
+        holder.tSection.setText(title[0]);
+        holder.tEngTitle.setText(title[2]);
         holder.tDescription.setText(mGalTempArray.get(position).getDescription());
         holder.iGallery.setImageBitmap(mGalTempArray.get(position).getPicture());
 
