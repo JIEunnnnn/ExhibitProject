@@ -64,22 +64,35 @@ public class FirstActivity extends Fragment {
 
 
         int mapNum = ((DetailsActivity)getActivity()).mapNum;
-        int[][] pointer = {{265, 500}, {476,268}, {80, 310}, {355, 85}};
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        String[] galleries = new String[4];
+        int galNum = 0;
+
         List<String> route = new ArrayList<String>();
         List<String> A = new ArrayList<String>();
         List<String> B = new ArrayList<String>();
         List<String> C = new ArrayList<String>();
-        float[][] pointer2 = {{width*0.43f,height*0.52f},{width*0.8f, height*0.283f},{width*0.147f, height*0.332f},{width*0.6f, height*0.092f}};
+        float[][] pointer;
+
         ImageView mapView = view.findViewById(R.id.mapView);
         TextView tRoute = view.findViewById(R.id.t_route);
+        BitmapDrawable bd = null;
+        if(mapNum==1){
+            bd = (BitmapDrawable) getResources().getDrawable(R.drawable.map3,null);
+            height=width;
+            float[][] pointer1 = {{width*0.76f,height*0.27f},{width*0.3f, height*0.27f},{width*0.915f, height*0.8f}};
+            pointer = pointer1;
+            galNum=3;
+        } else{
+            bd = (BitmapDrawable) getResources().getDrawable(R.drawable.map2,null);
+            float[][] pointer0 = {{width*0.43f,height*0.52f},{width*0.8f, height*0.283f},{width*0.6f, height*0.0915f},{width*0.147f, height*0.332f}};
+            pointer = pointer0;
+            galNum=4;
+        }
         Bitmap bitmap = Bitmap.createBitmap( width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        BitmapDrawable bd = null;
-        bd = (BitmapDrawable) getResources().getDrawable(R.drawable.map2,null);
+        String[] galleries = new String[galNum];
         Bitmap bit = Bitmap.createScaledBitmap(bd.getBitmap(), width, height, true);
         canvas.drawColor(Color.TRANSPARENT);
         canvas.drawBitmap(bit,0,0,null);
@@ -112,7 +125,7 @@ public class FirstActivity extends Fragment {
                 break;
         }
             paint.setAlpha(150);
-            canvas.drawCircle(pointer2[i][0], pointer2[i][1], 80, paint);
+            canvas.drawCircle(pointer[i][0], pointer[i][1], 80, paint);
             galleries[i] = stat;
         }
         mapView.setImageBitmap(bitmap);
@@ -142,5 +155,9 @@ public class FirstActivity extends Fragment {
         tRoute.setText("추천 경로: "+route.toString());
 
         return view;
+    }
+
+    public void mapRender(float[][] pointer, String mapNum){
+
     }
 }
