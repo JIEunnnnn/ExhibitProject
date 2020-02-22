@@ -1,9 +1,14 @@
 package com.example.exhibitproject;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +23,12 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-
+//=여기를 수정해서 로딩을 줄여야해
 public class ZeroActivity extends Fragment {
     private String title;
     private int page;
+
+
 
     public static ZeroActivity newInstance(int page, String title) {
         ZeroActivity fragment = new ZeroActivity();
@@ -32,11 +39,24 @@ public class ZeroActivity extends Fragment {
         return fragment;
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        page = getArguments().getInt("someInt", 0);
+        title = getArguments().getString("someTitle");
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
+
+       //  ft.detach(this).attach(this).commit();
+
+
+        refresh();
+
 
     }
 
@@ -68,6 +88,7 @@ public class ZeroActivity extends Fragment {
             Bitmap bm = BitmapFactory.decodeStream(exhibit1);
             gView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             gView.setImageBitmap(bm);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,5 +100,10 @@ public class ZeroActivity extends Fragment {
         g_des_d.setText(detailData);
 
         return view;
+    }
+
+    private void refresh(){
+        FragmentTransaction trans = getFragmentManager().beginTransaction();
+        trans.detach(this).attach(this).commit();
     }
 }
