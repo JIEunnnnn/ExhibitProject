@@ -46,7 +46,7 @@ public class SecondActivity extends Fragment {
 
     }
 
-    String[] name, name1, detail, pic;
+    String[] name, detail, pic;
     InputStream exhibit1;
 
     @Override
@@ -67,9 +67,6 @@ public class SecondActivity extends Fragment {
         detail = ((DetailsActivity)getActivity()).fs2;
         pic = ((DetailsActivity)getActivity()).ps;
 
-
-
-        //------repeat------
         for(int i=0; i< name.length;i++)
         {
             GalItem item = new GalItem();
@@ -88,7 +85,6 @@ public class SecondActivity extends Fragment {
 
             mGalArray.add(item);
         }
-        //------------------
 
         mGalAdapter = new GalAdapter(mGalArray);
         rDetail.setAdapter(mGalAdapter);

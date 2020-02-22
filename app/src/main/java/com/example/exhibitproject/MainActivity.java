@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ExItem> mExArray;
     private LinearLayoutManager layoutManager;
 
-    public static final String url = "http://192.168.0.5:3000/";
-    // 192.168.0.2
+    public static final String url = "http://192.168.0.5:3000/";//TODO:SET SERVER IP ADDR
 
     static RecyclerView exList;
     private static final String TAG = "OKHTTP 테스트";
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     String name, data, detaildata; // 전시회이름, 전시회설명, 전시회내 관내용
     int expecnum, expectime; // 예상인원, 예상시간
 
-    InputStream exhibit1, exhibit2  ;
+    InputStream exhibit1;
     Bitmap bm ;
 
     @Override
@@ -77,33 +76,15 @@ public class MainActivity extends AppCompatActivity {
         mExArray = new ArrayList<ExItem>();
 
         connectServ.requestGet(url);
-        // connectServ.jsonGet(url);
 
         layoutManager = new LinearLayoutManager(MainActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         exList.setLayoutManager(layoutManager);
 
         asM = getResources().getAssets();
-           /* ExItem item = new ExItem();
-            item.setNum(0); // 예상인원
-            item.setTime(0); // 예상시간
-            item.setName(result);
-            mExArray.add(item);*/
-
         mExAdapter = new ExAdapter(mExArray);
         exList.setAdapter(mExAdapter);
         exList.setItemAnimator(new DefaultItemAnimator());
-
-
-        //------------test btn
-        /*Button btnT = findViewById(R.id.button_t);
-        btnT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     class HttpConnection {
@@ -132,23 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-
                                 Log.d(TAG, "서버텟트33333"+response );
-                                // input =  response.body().byteStream();
-                                // bm = BitmapFactory.decodeStream(input);
-
-                                //Log.d(TAG, "서버텟트33333"+bm);
-
-                               //  response 그림을 출력하기...?
-                                result =  response.body().string(); // tostring()아님! string()써야함ㅇㅇㅇㅇ
-
-
-
-                               //  Log.d(TAG, "서버텟트33333"+result);
-                               //  Log.d(TAG, "서버텟트33333"+name);
+                                result =  response.body().string();
                                jsonGet(result);
-
                             }
                         });
 
@@ -160,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         public void jsonGet(String result){
-                    // JsonArray 추가하고 json object 로 받아서 하기 ㅇㅇㅇ.ㅇ..!
-                    //Value of type org.json.JSONArray cannot be converted to JSONObject
 
             try{
 
@@ -169,9 +134,6 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonob =  new JSONObject();
 
                  Log.d(TAG, "서버텟트33333JSONNNNN"+jsonar);
-                 //jsonob = new JSONObject(response.body().toString());
-
-                // Iterator i = jsonob.keys();
 
            for(int k=0; k<jsonar.length(); k++){
 
@@ -201,8 +163,6 @@ public class MainActivity extends AppCompatActivity {
                   }
 
            }
-
-                // item.setImage(); //  이미지를 비트맵으로 변환시켜서 받기
                 mExArray.add(item);
 
             }
@@ -218,12 +178,11 @@ public class MainActivity extends AppCompatActivity {
                         mExAdapter.setOnItemClickListener(new ExAdapter.OnItemClickListener(){
                             @Override
                             public void onItemClick(ExAdapter.ViewHolder holder, View view, int position) {
-                                Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getApplicationContext(),"position = "+position,Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
                                 intent.putExtra("NAME", ExAdapter.getItem(position).getName());
                                 intent.putExtra("MAP", position);
                                 intent.putExtra("IMAGENAME",ExAdapter.getItem(position).getName());
-                                //intent.putExtra("EXNAME", name[position] );
                                 startActivity(intent);
                             }
                         });
@@ -236,29 +195,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "서버텟트33333에러났냐...."+e.getMessage());
                 e.printStackTrace();
             }
-
-
-
-
-
-
         }
-
-        // 서버에 이미지 보내달라고 요청하기
-
-         /*
-          public void requestImg(String url){
-
-                }
-          */
-
-
-
     }
 
 
     void displayFiles(AssetManager as, String path ){
-        // 내가 지정한 path에 파일이 있으면 출력해야ㅣㅈ....
         try{
             String list[] = as.list(path);
             if(list !=null){

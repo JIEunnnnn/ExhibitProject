@@ -38,31 +38,20 @@ import static com.example.exhibitproject.MainActivity.JSON;
 import static com.example.exhibitproject.MainActivity.url;
 import static java.sql.Types.NULL;
 
-// 내일할일 서버합치고 데이터맵핑 확인도하고
-//
-// 내일 => 혼잡도색깔나타내고 경로그리고
-// 업데이트시키는거 ㅇㅇ !
-// db변경하고
-//
-// 목요일날 : 맵액티비티, 상세페이지 정보화면ㅁ만 나타내는거 ㅇㅇ!
 public class DetailsActivity extends AppCompatActivity {
-    //private ViewPager2 vpPager;
     FragmentPagerAdapter adapterViewPager;
     private WormDotsIndicator indicator;
 
     private static final String TAG = "OKHTTP 테스트";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String url = "http://192.168.0.5:3000/";
+    public static final String url = "http://192.168.0.5:3000/";//TODO:SET SERVER IP ADDR
    //  name nownum size
 
     String result ; // 잘받아왔는지 전체값출력
     String title, data, detaildata, g_name, g_size, g_people, g_des, g_guide, g_picture;  // 전시회이름, 전시회설명, 관내인원, 관내크기, 관이름, 관내자세한설명, 전시회 그림설명
     String Exname, imageNum; // 서버로 post보낼때 필요한 ....
     int  mapNum ; // intent넘기는거 구분하는 변수
-    int[] exhbitpeople, exhibitsize ;
-    //firstex secondex, thirdex, fourtex nownum size name detaildata
-    //// 이름 현재인원수 전시회자세한설명 관크기 전시회 내의 관별 설명 3/4
 
     String[] fs = new String[4]; // 관내인원 분할
     String[] ss = new String[4]; // 관내크기 분할
@@ -92,8 +81,6 @@ public class DetailsActivity extends AppCompatActivity {
         imageNum = intent.getStringExtra("IMAGENAME");
         // String Exname = intent.getStringExtra("EXNAME");
          Log.d(TAG, "DetailActivityy서버텟트11111" + Exname);
-        //TextView dName = findViewById(R.id.tView_detail_name);
-        //dName.setText(Exname);
 
 
 
@@ -109,9 +96,6 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         adapterViewPager.notifyDataSetChanged();
-        /*FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-        ft.detach(R.layout.zero).attach(this).commit();*/
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
@@ -226,27 +210,10 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     public void jsonGet(String res){
-
-        //result[{"exhibitpeople":[10,3,6,9],"exhibitsize":[100,300,60,900],"exhibitname":["number1","number2","number3","number4"],
-        // "exhibitdetaildata":["1ㄱ임","2관과임","3관ㄱ과임","4관임임"],"name":"exhibit1","detaildata":"전시고고1관"}]
-
-        // String result ; // 잘받아왔는지 전체값출력
-        // String name, detaildata, firstex, secondex, thirdex, fourthex, fifthex ;  // 전시회이름, 전시회설명, 전시회내 관내용
-        // String Exname; // 서버로 post보낼때 필요한 ....
-        // int nownum, size, mapNum ; // 현재인원, 관크기
-
-
-        //firstex secondex, thirdex, fourtex nownum size name detaildata
-        //// 이름 현재인원수 전시회자세한설명 관크기 전시회 내의 관별 설명 3/4
-
         try{
             JSONArray jsonar = new JSONArray(res);
             JSONObject jsonob =  new JSONObject();
             Log.d(TAG, "DetailActivity서버텟트33333"+jsonar );
-
-            //JSONArray JsonArray = (JSONArray) genreJsonObject.get("resultList");
-           //  JSONObject a = (JSONObject) JsonArray.get(0);
-            // JSONObject b = (JSONObject) JsonArray.get(1);
             Object js = jsonar.getJSONObject(0);
             Log.d(TAG, "테스트!!!!DetailActivity서버텟트33333JS)"+js);
 

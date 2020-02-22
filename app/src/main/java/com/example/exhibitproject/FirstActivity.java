@@ -27,11 +27,9 @@ import java.util.List;
 
 
 public class FirstActivity extends Fragment {
-    // Store instance variables
     private String title;
     private int page;
 
-    // newInstance constructor for creating fragment with arguments
     public static FirstActivity newInstance(int page, String title) {
         FirstActivity fragment = new FirstActivity();
         Bundle args = new Bundle();
@@ -41,7 +39,6 @@ public class FirstActivity extends Fragment {
         return fragment;
     }
 
-    // Store instance variables based on arguments passed
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,15 +47,10 @@ public class FirstActivity extends Fragment {
 
     }
 
-    // Inflate the view for the fragment based on layout XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first, container, false);
-
-        //get data from details activity
-        /*String[] nownum = ((DetailsActivity)getActivity()).fs; // 관내인원
-        String[] size = ((DetailsActivity)getActivity()).ss; // 관내크기*/
         String[] nownum = {"10","3","6","9"};
         String[] size = {"12","300","60","900"};
 

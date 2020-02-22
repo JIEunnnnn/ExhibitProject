@@ -1,7 +1,5 @@
 package com.example.exhibitproject;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
