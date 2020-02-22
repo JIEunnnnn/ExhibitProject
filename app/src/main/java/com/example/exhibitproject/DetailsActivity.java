@@ -19,6 +19,7 @@ import okhttp3.Response;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Array;
 
+import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
 import static com.example.exhibitproject.MainActivity.JSON;
 import static com.example.exhibitproject.MainActivity.url;
 import static java.sql.Types.NULL;
@@ -69,8 +71,14 @@ public class DetailsActivity extends AppCompatActivity {
     String[] gs = new String[2]; //가이드 정보
     String[] ps = new String[4] ; // 그림 정보
 
+    @Override
+    public void onAttachFragment(@NonNull Fragment fragment) {
+        super.onAttachFragment(fragment);
+        final HttpConnection connectServ = new HttpConnection();
+        connectServ.requestGet(url);
+    }
 
-   // 여기 수정하기
+    // 여기 수정하기
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,26 +95,20 @@ public class DetailsActivity extends AppCompatActivity {
         //TextView dName = findViewById(R.id.tView_detail_name);
         //dName.setText(Exname);
 
+
+
         final ViewPager vpPager = (ViewPager) findViewById(R.id.vPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
 
-       adapterViewPager.notifyDataSetChanged();
+        adapterViewPager.notifyDataSetChanged();
         vpPager.setAdapter(adapterViewPager);
-
-
-
-
-
-       // vpPager.setCurrentItem();
-
-
-
 
         indicator = (WormDotsIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
 
-        final HttpConnection connectServ = new HttpConnection();
-        connectServ.requestGet(url);
+
+
+        adapterViewPager.notifyDataSetChanged();
         /*FragmentTransaction ft = getFragmentManager().beginTransaction();
 
         ft.detach(R.layout.zero).attach(this).commit();*/
@@ -144,8 +146,11 @@ public class DetailsActivity extends AppCompatActivity {
             return "Page " + position;
         }
 
-
+        public int getItemPosition(Object object){
+            return POSITION_NONE;
+        }
     }
+
 
 
 
@@ -196,6 +201,15 @@ public class DetailsActivity extends AppCompatActivity {
                                 Log.d(TAG, "DetailActivity서버텟트33333result"+result );
 
                                 jsonGet(result);
+
+                                runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+
+
+                                    }
+                                });
                             }
                         });
 
@@ -279,6 +293,7 @@ public class DetailsActivity extends AppCompatActivity {
             ps = g_picture.split(",");
 
             Log.d(TAG, "DetailActivity서버텟트33333JSONNNNNㅅ;ㅣ비ㅣㅣㅣㅣ");
+
 
         }catch (JSONException e){
             Log.d(TAG, "DetailActivity서버텟트33333에러났냐...."+e.getMessage());
