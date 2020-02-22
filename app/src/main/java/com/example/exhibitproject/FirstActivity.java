@@ -20,7 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FirstActivity extends Fragment {
@@ -65,8 +68,14 @@ public class FirstActivity extends Fragment {
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
         int width = dm.widthPixels;
         int height = dm.heightPixels;
+        String[] galleries = new String[4];
+        List<String> route = new ArrayList<String>();
+        List<String> A = new ArrayList<String>();
+        List<String> B = new ArrayList<String>();
+        List<String> C = new ArrayList<String>();
         float[][] pointer2 = {{width*0.43f,height*0.52f},{width*0.8f, height*0.283f},{width*0.147f, height*0.332f},{width*0.6f, height*0.092f}};
         ImageView mapView = view.findViewById(R.id.mapView);
+        TextView tRoute = view.findViewById(R.id.t_route);
         Bitmap bitmap = Bitmap.createBitmap( width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         BitmapDrawable bd = null;
@@ -104,8 +113,33 @@ public class FirstActivity extends Fragment {
         }
             paint.setAlpha(150);
             canvas.drawCircle(pointer2[i][0], pointer2[i][1], 80, paint);
+            galleries[i] = stat;
         }
         mapView.setImageBitmap(bitmap);
+
+        for(int i=0;i<galleries.length;i++){
+            if(galleries[i].equals("A")){
+                A.add((i+1)+"관"+galleries[i]);
+            }else if(galleries[i].equals("B")){
+                B.add((i+1)+"관"+galleries[i]);
+            }else{
+                C.add((i+1)+"관"+galleries[i]);
+            }
+        }//A,B,C 분류
+
+        for(int i=0;i<A.size();i++){
+            route.add(A.get(i).substring(0,2));
+        }
+
+        for(int i=0; i<B.size();i++){
+            route.add(B.get(i).substring(0,2));
+        }
+
+        for(int i=0; i<C.size();i++){
+            route.add(C.get(i).substring(0,2));
+        }
+
+        tRoute.setText("추천 경로: "+route.toString());
 
         return view;
     }

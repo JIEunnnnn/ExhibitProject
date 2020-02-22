@@ -24,11 +24,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
     <TextView
+        android:id="@+id/t_route"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="추천 경로"
-        android:paddingBottom="30dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/yungothic"
+        android:text="@string/g_reco"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         />
 
 </LinearLayout>

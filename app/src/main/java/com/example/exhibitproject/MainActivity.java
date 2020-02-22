@@ -84,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
         exList.setLayoutManager(layoutManager);
 
         asM = getResources().getAssets();
-            ExItem item = new ExItem();
+           /* ExItem item = new ExItem();
             item.setNum(0); // 예상인원
             item.setTime(0); // 예상시간
             item.setName(result);
-            mExArray.add(item);
+            mExArray.add(item);*/
 
         mExAdapter = new ExAdapter(mExArray);
         exList.setAdapter(mExAdapter);
