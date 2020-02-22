@@ -14,7 +14,7 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="loadTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/line</item>
+        <item name="android:windowBackground">@drawable/logo</item>
     </style>
 
 </resources>
