@@ -12,8 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/g_pre"
-        android:textSize="25sp"
-        android:paddingBottom="10dp"/>
+        android:fontFamily="@font/sourcehanserif"
+        android:textSize="30sp"
+        android:paddingBottom="15dp"
+        android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rDetail"

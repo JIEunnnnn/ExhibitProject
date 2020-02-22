@@ -13,4 +13,5 @@
     <string name="g_docent">도슨트 운영</string>
     <string name="g_des">전시소개</string>
     <string name="g_pre">전시관 프리뷰</string>
+    <string name="g_map">전시홀 지도</string>
 </resources>
