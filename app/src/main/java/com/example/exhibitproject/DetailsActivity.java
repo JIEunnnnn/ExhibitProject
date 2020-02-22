@@ -1,10 +1,12 @@
 package com.example.exhibitproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 import okhttp3.Call;
@@ -67,6 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
     String[] gs = new String[2]; //가이드 정보
     String[] ps = new String[4] ; // 그림 정보
 
+
    // 여기 수정하기
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +87,20 @@ public class DetailsActivity extends AppCompatActivity {
         //TextView dName = findViewById(R.id.tView_detail_name);
         //dName.setText(Exname);
 
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vPager);
+        final ViewPager vpPager = (ViewPager) findViewById(R.id.vPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+
+       adapterViewPager.notifyDataSetChanged();
         vpPager.setAdapter(adapterViewPager);
+
+
+
+
+
+       // vpPager.setCurrentItem();
+
+
+
 
         indicator = (WormDotsIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
@@ -114,6 +128,7 @@ public class DetailsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
+
                     return ZeroActivity.newInstance(0, "Page # 1");
                 case 1:
                     return FirstActivity.newInstance(1, "Page # 2");
@@ -128,6 +143,7 @@ public class DetailsActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return "Page " + position;
         }
+
 
     }
 
